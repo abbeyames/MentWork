@@ -12,22 +12,6 @@ def index():
 def login():
   return render_template("login.html")
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name=None):
-    return render_template('hello.html', name=name)
-
-
-
-@app.route('/user/<username>')
-def profile(username):
-    return f'{username}\'s profile'
-
-with app.test_request_context():
-  print(url_for('index'))
-  print(url_for('login'))
-  print(url_for('login', next='/'))
-  print(url_for('profile', username='John Doe'))
 
 app.run(host='0.0.0.0', port=8080)
 
