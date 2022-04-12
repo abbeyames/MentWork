@@ -1,0 +1,110 @@
+:root {
+    --darkTeal    : #388087;
+    --lightTeal   : #6fb3b8;
+    --lightBlue   : #badfe7;
+    --lightGreen  : #c2edce;
+    --offWhite    : #f6f6f2;
+    --lightGray   : #e3e4e4;
+
+    --headingFont : 'Oswald', sans-serif;
+    --bodyFont    : 'Quattrocento', serif;
+}
+
+#monthTable th {
+    text-align: center;
+    /* border: 1px solid var(--offWhite); */
+    /* padding: 10px; */
+    color: var(--darkTeal);
+}
+
+.monthBox {
+    border: 1px solid var(--offWhite);
+    background-color: var(--offWhite);
+    opacity: .5;
+}
+
+.monthBox h3 {
+    text-align: right;
+    /* opacity: 1; */
+}
+
+.btn-section {
+    display: inline;
+    float: right;
+}
+
+#dateHeader, #weekDate, #monthName {
+    display: inline-block;
+}
+
+.changeDateBtn {
+    border: 1px solid var(--lightGreen);
+    background-color: var(--lightGreen);
+    color: var(--darkTeal);
+    font-family: var(--headingFont);
+    width: 10vw;
+    padding: 5px;
+}
+
+.changeDateBtn:hover {
+    border: 1px solid var(--lightGray);
+    background-color: var(--lightGray);
+}
+
+/* For small screens (phones in portrait)  */
+@media only screen and (max-width: 500px) {
+    #monthTable th {
+
+    }
+
+    .monthBox {
+        width: 10vw;
+        height: 10vh;
+
+    }
+
+    .monthBox h3 {
+
+    }
+
+}
+
+/* For medium screens (e.g. landscape phones and portrait tablets) */
+@media only screen and (min-width: 501px) {
+    #monthTable th {
+
+    }
+
+    .monthBox {
+        width: 10vw;
+        height: 10vh;
+    }
+
+    .monthBox h3 {
+        position: relative;
+        left: 5vw;
+        bottom: 2vh;
+
+    }
+
+}
+
+/* For large screens or landscape tablets*/		
+@media only screen and (min-width: 1024px) {
+    #monthTable th {
+        padding: 10px;
+        font-size: 1.5rem;
+    }
+
+    .monthBox {
+        width: 10vw;
+        height: 13vh;
+    }
+
+    .monthBox h3 {
+        position: relative;
+        left: 6vw;
+        bottom: 2vh;
+    }
+
+}

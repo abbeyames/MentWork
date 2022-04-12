@@ -1,0 +1,69 @@
+:root {
+    --darkTeal    : #388087;
+    --lightTeal   : #6fb3b8;
+    --lightBlue   : #badfe7;
+    --lightGreen  : #c2edce;
+    --offWhite    : #f6f6f2;
+    --lightGray   : #e3e4e4;
+
+    --headingFont : 'Oswald', sans-serif;
+    --bodyFont    : 'Quattrocento', serif;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--darkTeal);
+    /* padding: 30vh 0; */
+}
+
+main {
+    background-color: var(--lightGreen);
+    height: 60vh;
+    padding: 15vh 15vw;
+}
+
+section {
+    height: 20vh;
+}
+
+.bottom {
+    background-image: linear-gradient(var(--lightGreen), var(--darkTeal));
+}
+
+.top {
+    background-image: linear-gradient(var(--darkTeal), var(--lightGreen));
+}
+
+h1 {
+    font-family: var(--headingFont);
+    color: var(--offWhite);
+    font-size: 8rem;
+    text-shadow: 5px 2px 5px var(--darkTeal);
+}
+
+p {
+    font-family: var(--bodyFont);
+    font-size: 2rem;
+    color: var(--darkTeal);
+}
+
+.entryBtn {
+    border: 2px solid var(--offWhite);
+    background-color: var(--lightTeal);
+    color: var(--offWhite);
+    font-family: var(--headingFont);
+    width: 10vw;
+    padding: 10px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin: 10vh 5px;
+    float: right;
+    text-align: center;
+    box-shadow: 2px 2px 5px var(--darkTeal);
+}
+
+.entryBtn:hover {
+    border-color: var(--lightTeal);
+    color: var(--lightTeal);
+    background-color: var(--lightGreen);
+}

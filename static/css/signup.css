@@ -1,0 +1,66 @@
+:root {
+    --darkTeal    : #388087;
+    --lightTeal   : #6fb3b8;
+    --lightBlue   : #badfe7;
+    --lightGreen  : #c2edce;
+    --offWhite    : #f6f6f2;
+    --lightGray   : #e3e4e4;
+
+    --headingFont : 'Oswald', sans-serif;
+    --bodyFont    : 'Quattrocento', serif;
+}
+
+body {
+    background-color: var(--lightBlue);
+    padding: 10vh 20vw;
+}
+
+#register, #login {
+    background-color: var(--offWhite);
+    padding: 10vh 10vw;
+    box-shadow: 10px 10px 10px var(--darkTeal);
+    border-radius: 5px;
+    border: 10px double var(--lightTeal);
+}
+
+h1 {
+    color: var(--darkTeal);
+    text-align: center;
+}
+
+label {
+    font-family: var(--headingFont);
+    color: var(--darkTeal);
+    margin-right: 10px;
+}
+
+input {
+    font-family: var(--bodyFont);
+    color: var(--darkTeal);
+    width: 10vw;
+}
+
+button {
+    font-family: var(--headingFont);
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: 2px solid var(--darkTeal);
+    background-color: var(--darkTeal);
+    color: var(--offWhite);
+}
+
+button:hover {
+    background-color: var(--lightGreen);
+    border: 2px solid var(--lightGreen);
+    color: var(--darkTeal);
+}
+
+table {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+tr {
+    height: 5vh;
+}
