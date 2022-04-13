@@ -22,32 +22,39 @@
 <body>
     <div id="register">
         <h1>Create MentWork Account</h1>
-        <table>
-            <tr>
-                <td><label for="firstName">First Name: </label></td>
-                <td><input type="text" id="firstName"></td>
-            </tr>
-            <tr>
-                <td><label for="lastName">Last Name: </label></td>
-                <td><input type="text" id="lastName"></td>
-            </tr>
-            <tr>
-                <td><label for="employeeEmail">Employee Email: </label></td>
-                <td><input type="email" id="employeeEmail"></td>
-            </tr>
-            <tr>
-                <td><label for="createPassword">Create Password: </label></td>
-                <td><input type="password" id="createPassword"></td>
-            </tr>
-            <tr>
-                <td><label for="verifyPassword">Confirm Password: </label></td>
-                <td><input type="password" id="verifyPassword"></td>
-            </tr>
-            <tr id="pwdWarning"></tr>
-            <tr>
-                <td colspan="2"><button type="button" onclick="register()">REGISTER</button></td>
-            </tr>
-        </table>
+        <form method="POST" action="/signup">
+          <table>
+              <tr>
+                  <td><label for="firstName">First Name: </label></td>
+                  <td><input type="text" id="firstName" name="firstName"></td>
+              </tr>
+              <tr>
+                  <td><label for="lastName">Last Name: </label></td>
+                  <td><input type="text" id="lastName" name="lastName"></td>
+              </tr>
+              <tr>
+                  <td><label for="jobTitle">Job Title: </label></td>
+                  <td><input type="text" id="jobTitle" name="jobTitle"></td>
+              </tr>
+              <tr>
+                  <td><label for="employeeEmail">Employee Email: </label></td>
+                  <td><input type="email" id="employeeEmail" name="email"></td>
+              </tr>
+              <tr>{{ error }}</tr>
+              <tr>
+                  <td><label for="createPassword">Create Password: </label></td>
+                  <td><input type="password" id="createPassword" name="password"></td>
+              </tr>
+              <tr>
+                  <td><label for="verifyPassword">Confirm Password: </label></td>
+                  <td><input type="password" id="verifyPassword" name="password"></td>
+              </tr>
+              <tr id="pwdWarning"></tr>
+              <tr>
+                  <td colspan="2"><input type="submit" value="REGISTER" class="submit"></td>
+              </tr>
+          </table>
+        </form>
     </div>
 
     <!-- My Scripts  -->

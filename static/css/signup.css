@@ -40,7 +40,7 @@ input {
     width: 10vw;
 }
 
-button {
+.submit {
     font-family: var(--headingFont);
     display: block;
     width: 100%;
@@ -50,7 +50,7 @@ button {
     color: var(--offWhite);
 }
 
-button:hover {
+.submit:hover {
     background-color: var(--lightGreen);
     border: 2px solid var(--lightGreen);
     color: var(--darkTeal);
