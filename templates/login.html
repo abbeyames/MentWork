@@ -21,21 +21,26 @@
 
 <body>
     <div id="login">
-        <h1>Welcome back!</h1>
+      <h1>Welcome back!</h1>
+      <form method="POST" action="/login">
         <table>
             <tr>
                 <td><label for="usernameEntry">Email:</label></td>
-                <td><input id="usernameEntry" type="text"></td>
+                <td><input id="usernameEntry" name="email" type="email"></td>
             </tr>
             <tr>
                 <td><label for="passwordEntry">Password:</label></td>
-                <td><input id="passwordEntry" type="password"></td>
+                <td><input id="passwordEntry" name="password" type="password"></td>
             </tr>
-            <tr id="invalidLogin"></tr>
+            <tr></tr>
             <tr>
-                <td colspan="2"><button type="button" onclick="login()">LOGIN</button></td>
+                <td colspan="2"><input type="submit" value="LOGIN" class="submit"></td>
             </tr>
         </table>
+        
+        <div id="invalidLogin">{{ error }}</div>
+        
+      </form>
     </div>
 
     <!-- My Scripts  -->

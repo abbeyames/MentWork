@@ -351,3 +351,14 @@ function changeDate(movement, calendarType) {
         generateMonth(shownMonth);
     }
 } 
+
+function recurringOptions() {
+  let optionSelected = document.getElementById("recurring").value;
+  let recurringDays = document.getElementById("recurringDays");
+  
+  if (optionSelected === "no") {
+    recurringDays.style.display = "none";
+  } else {
+    recurringDays.style.display = "block";
+  }
+}
