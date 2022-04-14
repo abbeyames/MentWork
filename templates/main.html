@@ -25,7 +25,50 @@
  
  <body onload="initialize()">
     <!-- Navbar JS  -->
-    <script id="replace_with_navbar" src="../static/js/navbar.js"></script>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/main">MentWork</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MentWork</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/main">Calendar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Topics</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Find Mentors</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                  <li><a class="dropdown-item" href="#">Update Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Submit Review</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
  
     <main>
      <div class="row">
@@ -42,40 +85,58 @@
          <div class="calendar col-lg-09 col-md-09 col-sm-12 lightTeal">
              <div id="scheduleEvent">
                  <h1 id="scheduleHeader">Schedule New Meeting</h1>
-                 <form id="schedule" action="">
+                 <form id="schedule" action="/main/schedule" method="POST">
                      <table>
                          <tr>
                             <td>
                                 <label for="eventTitle">Title: </label></td>
                             <td colspan="3">
-                                <input id="eventTitle" class="scheduleTitle" type="text"></td>
+                                <input id="eventTitle" name="eventTitle" class="scheduleTitle" type="text"></td>
                          </tr>
                          <tr>
                              <td>
                                 <label for="startDate">Start Date: </label></td>
                              <td>
-                                <input id="startDate" type="datetime-local"></td>
+                                <input id="startDate" name="startDate" type="datetime-local"></td>
                              <td>
                                 <label for="endDate">End Date: </label></td>
                              <td>
-                                <input id="endDate" type="datetime-local"></td>
+                                <input id="endDate" name="endDate" type="datetime-local"></td>
                          </tr>
                          <tr>
                              <td>
                                 <label for="recurring">Recurring: </label></td>
-                             <td colspan="3">
-                                <select id="recurring">
+                             <td>
+                                <select id="recurring" name="recurring" onclick="recurringOptions()">
                                     <option value="no">Does Not Repeat</option>
                                     <option value="daily">Repeats Daily</option>
                                     <option value="weekly">Repeats Weekly</option>
                                     <option value="monthly">Repeats Monthly</option>
                                 </select></td>
+                              <td colspan="2">
+                                <div id="recurringDays" style="display: none">
+                                  <input type="checkbox" id="recurSun" name="sun" value="sun">
+                                  <label for="recurSun">S</label>
+                                  <input type="checkbox" id="recurMon" name="mon" value="mon">
+                                  <label for="recurMon">M</label>
+                                  <input type="checkbox" id="recurTues" name="tues" value="tues">
+                                  <label for="recurTues">T</label>
+                                  <input type="checkbox" id="recurWed" name="wed" value="wed">
+                                  <label for="recurWed">W</label>
+                                  <input type="checkbox" id="recurThurs" name="thurs" value="thurs">
+                                  <label for="recurThurs">T</label>
+                                  <input type="checkbox" id="recurFri" name="fri" value="fri">
+                                  <label for="recurFri">F</label>
+                                  <input type="checkbox" id="recurSat" name="sat" value="sat">
+                                  <label for="recurSat">S</label>
+                                </div>
+                              </td>
                          </tr>
                          <tr>
                              <td>
                                 <label for="description">Description: </label></td>
                              <td colspan="3">
-                                <input id="description" class="eventDescription" type="textarea" placeholder="Optional"></td>
+                                <textarea id="description" name="description" class="eventDescription"></textarea></td>
                          </tr>
                          <tr>
                              <td colspan="4">

@@ -64,3 +64,9 @@ table {
 tr {
     height: 5vh;
 }
+
+#invalidLogin, #invalidSignup {
+    margin: auto;
+    text-align: center;
+    padding-top: 2vh;
+}

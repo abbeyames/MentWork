@@ -40,7 +40,7 @@
                   <td><label for="employeeEmail">Employee Email: </label></td>
                   <td><input type="email" id="employeeEmail" name="email"></td>
               </tr>
-              <tr>{{ error }}</tr>
+              <tr></tr>
               <tr>
                   <td><label for="createPassword">Create Password: </label></td>
                   <td><input type="password" id="createPassword" name="password"></td>
@@ -54,6 +54,8 @@
                   <td colspan="2"><input type="submit" value="REGISTER" class="submit"></td>
               </tr>
           </table>
+
+          <div id="invalidSignup">{{ error }}</div>
         </form>
     </div>
 
