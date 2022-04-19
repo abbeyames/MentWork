@@ -6,6 +6,9 @@
     --offWhite    : #f6f6f2;
     --lightGray   : #e3e4e4;
 
+    --availColor  : #c2edce;
+    --unavailColor: #e3e4e4;
+
     --headingFont : 'Oswald', sans-serif;
     --bodyFont    : 'Quattrocento', serif;
 }
@@ -48,7 +51,7 @@
     .col-md-11  {width: 		 91.66%; }
     .col-md-12  {width: 		100.00%; }
     
-    .menu, .calendar {min-height: 100vh;}
+/*     .menu, .calendar {min-height: 100vh;} */
 }
 
 /* For large screens or landscape tablets*/		
@@ -68,13 +71,15 @@
     .col-lg-11  {width: 		 91.66%; }
     .col-lg-12  {width: 		100.00%; }
 
-    .menu, .calendar {min-height: 100vh;}
+/*     .menu, .calendar {min-height: 100vh;} */
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    /* max-width: 100vw; */
+  margin: 0;
+  padding: 0;
+  /* max-width: 100vw; */
+  height: 100vh;
+  overflow: scroll;
 }
 
 .menu, .calendar {
@@ -123,8 +128,8 @@ p, td {
 
 .daySchedule td {
     border: 1px solid var(--offWhite);
-    padding: 10px;
-    height: 9vh;
+    padding: 5px;
+/*     height: 9vh; */
 }
 
 .daySchedule .entry {
@@ -134,16 +139,30 @@ p, td {
 .timeSchedule {
     display: inline-block;
     border: 1px solid var(--offWhite);
-    padding: 3%;
+/*     padding: 3%; */
 }
 
 .timeSchedule .entry {
     border-bottom: 1px solid var(--offWhite);
 }
 
+#weekdayBody {
+  width: 100%;
+}
+
+#weekdayBody h3 {
+  text-align: center;
+  display: block;
+}
+
 #weekdayBody .timeSchedule {
-    width: 21vw;
-    margin-bottom: 5px;
+  width: 13.9%;
+  margin-bottom: 5px;
+  padding: 10px 20px;
+}
+
+#weekdayBody table {
+  margin: auto;
 }
 
 #weekdayBody .timeSchedule td {
@@ -151,13 +170,12 @@ p, td {
 }
 
 #weekdayBody .time {
-    width: 30%;
-
+  text-align: center;
+  border-top: 1px solid var(--offWhite);
 }
 
 #weekdayBody .entry {
-    width: 70%;
-
+    display: none;
 }
 
 .scheduleBtn {

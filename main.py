@@ -12,10 +12,18 @@ def index():
 
 @app.route('/db', methods=['POST', 'GET'])
 def db_info():
-  error = '';
+  text = '';
   if request.method == 'GET':
-    error = db.keys();
-  return render_template('db.html', error=error)
+    text += "Displaying account information currently present in the database<br><br>"
+    for key in db.keys():
+      text += "<br>Email:       " + db[key]["email"]
+      text += "<br>Password:    " + db[key]["password"]
+      text += "<br>First Name:  " + db[key]["firstName"]
+      text += "<br>Last Name:   " + db[key]["lastName"]
+      text += "<br>Job Title:   " + db[key]["jobTitle"]
+      text += "<br>"
+    
+  return render_template('db.html', text=text)
   
 # https://flask.palletsprojects.com/en/2.0.x/quickstart/
 @app.route('/login', methods=['POST', 'GET'])
@@ -25,7 +33,7 @@ def login():
     valid_login = attempt_login(request.form['email'], request.form['password'])
     if valid_login == 'login':
       login_user(request.form['email'])
-      return render_template("main.html") # should be redirect instead
+      return redirect("/main")
     elif valid_login == 'incorrect password':
       error = 'Incorrect password'
     else:
@@ -61,7 +69,7 @@ def signup():
                          request.form['lastName'],
                          request.form['jobTitle'])
       create_account(request.form['email'], user)
-      return render_template("login.html") # should be redirect instead
+      return redirect("/login")
     else:
       error = "An account with this email already exists"
   return render_template("signup.html", error=error)
@@ -90,9 +98,17 @@ def create_account(email, userData):
   db[email] = userData
   print("Account created")
 
-@app.route('/main')
+@app.route('/main', methods=['POST', 'GET'])
 def main():
-  return render_template("main.html")
+  global currentUser
+  # webText = '';
+  # if request.method == 'GET':
+  # for key in currentUser.items():
+  # webText += "Hello " + currentUser["firstName"]
+  
+  # return render_template("main.html", webText=webText)
+
+  return render_template("main.html", firstName=currentUser['firstName'], lastName=currentUser['lastName'])
 
 @app.route('/main/schedule', methods=['POST', 'GET'])
 def schedule():
@@ -111,16 +127,24 @@ def schedule():
   
   return render_template("main.html")
 
-def create_event(title, start, end, recurring, description, mentor):
+def create_event(title, start, end, recurring, recurringDays, description, mentor):
   event = {
     "eventTitle": title,
     "startDate": start,
     "endDate": end,
     "recurring": recurring,
+    "recurringDays": recurringDays,
     "description": description,
     "mentorAvailability": mentor
   }
   return event
+
+def add_event(event):
+  global currentUser
+  if event['recurring'] == "no":
+    currentUser['singularEvents'].append(event)
+  else:
+    currentUser['recurringEvents'].append(event)
   
 def update_user_data():
   global currentUser
@@ -132,7 +156,7 @@ def logout():
   global currentUser
   currentUser = {}
   print("User logged out")
-  return render_template("index.html") # should be redirect
+  return redirect("/")
 
 @app.route('/topics')
 def topics():

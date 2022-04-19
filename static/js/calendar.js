@@ -4,63 +4,105 @@ let currentDay      = dayNames[today.getDay()];
 let monthNames      = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 let currentMonth    = monthNames[today.getMonth()];
 let currentYear     = today.getFullYear();
+let monthNum        = today.getMonth() + 1;
+if (monthNum < 10) {
+  monthNum = '0' + monthNum;
+}
+let todayString     = currentYear + '-' + monthNum + '-' + today.getDate();
 
 function initialize() {
-    // ***
-    // Sets up the initial load 
-    // ***
+  // ***
+  // Sets up the initial load 
+  // ***
 
-    console.log('Page is being initialized');
+  console.log('Page is being initialized');
 
-    let dateHeader          = document.getElementById("dateHeader");
-    dateHeader.innerHTML    = today.toDateString();
-    let weekDate            = document.getElementById("weekDate");
-    weekDate.innerHTML      = generateWeek(today);
-    let monthName           = document.getElementById("monthName");
-    monthName.innerHTML     = currentMonth;
+  buildDay();
+  buildWeek();
 
-    buildDay();
-    buildWeek();
+  let dateHeader          = document.getElementById("dateHeader");
+  dateHeader.innerHTML    = today.toDateString();
+  let weekDate            = document.getElementById("weekDate");
+  weekDate.innerHTML      = generateWeek(today);
+  let monthName           = document.getElementById("monthName");
+  monthName.innerHTML     = currentMonth;
 
-    changeView('day');
+  changeView('day');
 }
 
 function changeView(view) {
-    // ***
-    // Changes the view on the main
-    // ***
+  // ***
+  // Changes the view on the main
+  // ***
 
-    // Hide all calendars
-    let day     = document.getElementById("dayCalendar");
-    let week    = document.getElementById("weekCalendar");
-    let month   = document.getElementById("monthCalendar");
-    let schedule= document.getElementById("scheduleEvent");
+  // Hide all calendars
+  let day     = document.getElementById("dayCalendar");
+  let week    = document.getElementById("weekCalendar");
+  let month   = document.getElementById("monthCalendar");
+  let schedule= document.getElementById("scheduleEvent");
 
-    day.style.display       = "none";
-    week.style.display      = "none";
-    month.style.display     = "none";
-    schedule.style.display  = "none";
+  day.style.display       = "none";
+  week.style.display      = "none";
+  month.style.display     = "none";
+  schedule.style.display  = "none";
 
-    // Enable selected calendar
-    switch(view) {
-        case 'day': 
-            console.log('Day calendar is being shown');
-            day.style.display   = "block";
-            break;
-        case 'week': 
-            console.log('Week calendar is being shown');
-            week.style.display  = "block";
-            break;
-        case 'month': 
-            console.log('Month calendar is being shown');
-            month.style.display = "block";
-            buildMonth();
-            generateMonth(today);
-            break;
-        case 'schedule':
-            console.log('Schedule meeting form is being shown');
-            schedule.style.display = "block";
+  // Enable selected calendar
+  switch(view) {
+    case 'day': 
+      console.log('Day calendar is being shown');
+      day.style.display   = "block";
+      break;
+    case 'week': 
+      console.log('Week calendar is being shown');
+      week.style.display  = "block";
+      break;
+    case 'month': 
+      console.log('Month calendar is being shown');
+      month.style.display = "block";
+      buildMonth();
+      generateMonth(today);
+      break;
+    case 'schedule':
+      console.log('Schedule meeting form is being shown');
+      schedule.style.display = "block";
+  }
+}
+
+function buildTime(schedule) {
+  let dayEnd          = 18;
+  let timeEnd         = ":00";
+  let meridiem        = "AM";
+  let hour            = 0;
+  
+  for (let dayStart = 9; dayStart < dayEnd; dayStart += .5) {     
+    let tableRow        = document.createElement("tr");
+    let timeCol         = document.createElement("td");
+      
+    if (dayStart % 1 > 0) {
+      hour = dayStart - .5;
+      timeEnd = ":30";
+    } else {
+      hour = dayStart;
+      timeEnd = ":00"
     }
+
+    if (dayStart > 12.5) {
+      hour = hour - 12;
+      meridiem = " AM";
+    } else {
+      meridiem = " PM";
+    }
+
+    timeCol.innerHTML   = hour + timeEnd + meridiem;
+    timeCol.className   = "time";
+    let entry           = document.createElement("td");
+    entry.className     = "entry";
+
+    tableRow.appendChild(timeCol);
+    tableRow.appendChild(entry);
+    schedule.appendChild(tableRow);
+  }
+  return schedule;
 }
 
 function buildDay() {
@@ -70,33 +112,22 @@ function buildDay() {
 
     let day                 = document.getElementById("dayCalendar");
     let daySchedule         = document.createElement("table");
-    daySchedule.className   = "daySchedule";
-    let dayEnd              = 18;
+    daySchedule.className   = "daySchedule " + todayString + 'DV';
+    daySchedule.id          = "dayTable";
 
-    for (let dayStart = 9; dayStart < dayEnd; dayStart++) {
-        let tableRow            = document.createElement("tr");
-
-        let timeCol             = document.createElement("td");
-        if (dayStart > 12) {
-            timeCol.innerHTML = (dayStart - 12) + ':00 PM';
-        } else {
-            timeCol.innerHTML = dayStart + ':00 AM';
-        }
-        timeCol.className       = "time";
-        let entry               = document.createElement("td");
-        // entry.innerHTML      = `&nbsp;`;
-        entry.className         = "entry";
-
-        tableRow.appendChild(timeCol);
-        tableRow.appendChild(entry);
-        daySchedule.appendChild(tableRow);
-    }
-    day.appendChild(daySchedule);
+    let schedule = buildTime(daySchedule);
+    
+    day.appendChild(schedule);
 }
 
 function generateDay(givenDate) {
-    let dateHeader          = document.getElementById("dateHeader");
-    dateHeader.innerHTML    = givenDate.toDateString();
+  let dateHeader          = document.getElementById("dateHeader");
+  dateHeader.innerHTML    = givenDate.toDateString();
+
+  let dateName = givenDate.toISOString().split("T")[0];
+  
+  let dayTable = document.getElementById("dayTable");
+  dayTable.className = "daySchedule " + dateName + 'DV';
 }
 
 function buildWeek() {
@@ -105,34 +136,16 @@ function buildWeek() {
     // ***
 
     let weeks = document.getElementsByClassName("timeSchedule");
-
+  
     for (let weekday = 0; weekday < 7; weekday++) {
-        let schedule                = document.createElement("table");
-        schedule.className          = "weekSchedule";
-        let dayEnd                  = 18;
-
-        for (let dayStart = 9; dayStart < dayEnd; dayStart++) {
-            let tableRow            = document.createElement("tr");
-
-            let timeCol             = document.createElement("td");
-            if (dayStart > 12) {
-                timeCol.innerHTML   = (dayStart - 12) + ':00 PM';
-            } else {
-                timeCol.innerHTML   = dayStart + ':00 AM';
-            }
-            timeCol.className       = "time";
-            let entry               = document.createElement("td");
-            // entry.innerHTML      = `&nbsp;`;
-            entry.className         = "entry";
-
-            tableRow.appendChild(timeCol);
-            tableRow.appendChild(entry);
-            schedule.appendChild(tableRow);
-        }
+        let weekSchedule       = document.createElement("table");
+        weekSchedule.className = "weekSchedule";
+        weekSchedule.id        = "weekTable" + weekday;
+        
+        let schedule = buildTime(weekSchedule);
         
         weeks[weekday].appendChild(schedule);
     }
-
 }
 
 function generateWeek(givenDate) {
@@ -191,8 +204,21 @@ function generateWeek(givenDate) {
             break;
     }
 
+    // console.log(sunDate);
+    generateWeekDates(sunDate);
+
     // Return week date to Sunday's date - Saturday's date
     return `${sun} - ${sat}`;
+}
+
+function generateWeekDates(givenDate) {
+  for (let weekday = 0; weekday < 7; weekday++) {
+    let idTag = "weekTable" + weekday;
+    let weekTable = document.getElementById(idTag);
+    let dateName = givenDate.toISOString().split("T")[0];
+    weekTable.className = "weekSchedule " + dateName + 'WV';
+    // console.log(weekTable);
+  }
 }
 
 function buildMonth() {
@@ -362,3 +388,16 @@ function recurringOptions() {
     recurringDays.style.display = "block";
   }
 }
+
+function populateEvents() {
+  let dayTable = document.getElementById("daySchedule");
+  let weekTables = document.getElementsByClassName("timeSchedule");
+  let monthTable = document.getElementById("monthTable");
+
+  let abbrvDayNames = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"];
+
+  for (let i = 0; i < weekTables.length; i++) {
+    
+  }
+}
+

@@ -1,1 +1,5 @@
-<div>{{ error }}</div>
+<div>
+{% autoescape false %}
+  {{ text }}
+{% endautoescape %}
+</div>
