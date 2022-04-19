@@ -158,7 +158,22 @@ def logout():
   print("User logged out")
   return redirect("/")
 
+@app.route('/topics')
+def topics():
+  return render_template("topics.html")
 
+@app.route('/mentors')
+def mentors():
+  return render_template("mentors.html")
+
+@app.route('/profile')
+def profile():
+  return render_template("profile.html")
+
+@app.route('/reviews')
+def reviews():
+  return render_template("reviews.html")
+  
 app.run(host='0.0.0.0', port=8080, debug=True)
 
 
